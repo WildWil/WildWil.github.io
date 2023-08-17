@@ -50,11 +50,28 @@
       text-align: center;
       margin-top: 10px;
     }
+
+    /* ... your existing styles ... */
+
+    .rotating-text {
+      color: white;
+      font-size: 24px;
+      animation: rotate 5s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotateY(0deg);
+      }
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
   </style>
 </head>
 <body>
   <header style="text-align: center; padding: 20px;">
-    <h1 style="color: white; padding: 20px; margin: 0;"> Clever | Portal</h1>
+    <h1 class="rotating-text" style="padding: 20px; margin: 0;"> Clever | Portal</h1>
   </header>
 
   <div class="input-container" style="text-align: center; margin-top: 20px;">
