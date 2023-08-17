@@ -1,11 +1,11 @@
 {
-  "name": "wildwil.github.io",
+  "name": "wildwil-github-io",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Personal website hosted on GitHub Pages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WildWil/WildWil.github.io.git"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Your Name",
+  "license": "MIT"
 }
