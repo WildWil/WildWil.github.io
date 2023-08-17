@@ -1,0 +1,14 @@
+{
+  "name": "wildwil-github-io", // Corrected project name
+  "version": "1.0.0",
+  "description": "Personal website hosted on GitHub Pages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WildWil/wildwil-github-io.git" // Corrected repository URL
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo No entry point required"
+  }
+}
