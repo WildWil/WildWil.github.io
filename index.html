@@ -6,90 +6,36 @@
   <title>Clever | Portal</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    body {
-      background-image: url('stars1.jpg');
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover; /* or contain, depending on your preference */
-      margin: 0; /* Remove default margin */
-      padding: 0; /* Remove default padding */
-    }
-
-    header {
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      color: white;
-      padding: 20px;
-      margin: 0;
-    }
-
-    .button-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #3498db;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .input-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    input[type="text"] {
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      margin-right: 10px;
-    }
-
-    main {
-      position: relative;
-      z-index: 1;
-      margin-top: 50px; /* Adjust the margin-top value for desired positioning */
-    }
-
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
+    /* ... your existing CSS ... */
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1> To be able to change the icon of the website do "Websitename.com/favicon.ico" for example : "google.com/favicon.ico".</h1>
+  <header style="text-align: center; padding: 20px;">
+    <h1 style="color: white; padding: 20px; margin: 0;"> To be able to change the icon of the website do "Websitename.com/favicon.ico" for example : "google.com/favicon.ico".</h1>
   </header>
 
-  <div class="input-container">
+  <div class="input-container" style="text-align: center; margin-top: 20px;">
     <label for="faviconInput">Change Favicon: </label>
     <input type="text" id="faviconInput" placeholder="Enter favicon URL">
     <button class="button" onclick="changeFavicon()">Apply</button>
   </div>
 
-  <div class="input-container">
+  <div class="input-container" style="text-align: center; margin-top: 20px;">
     <label for="titleInput">Change Title: </label>
     <input type="text" id="titleInput" placeholder="Enter new title">
     <button class="button" onclick="changeTitle()">Apply</button>
   </div>
 
-  <main>
-    <iframe src="https://flow-works.me" frameborder="0"></iframe>
+  <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center;">
+    <iframe id="originalWebsiteFrame" src="https://flow-works.me" frameborder="0" style="width: 100%; height: 800px;"></iframe>
+    <iframe id="spotifyFrame" src="" frameborder="0" class="hidden" style="width: 100%; height: 800px;"></iframe>
   </main>
 
-  <div class="button-container">
-    <a href="https://unblocked-spotify-website-url" class="button">Go to Unblocked Spotify</a>
+  <div class="button-container top-right" style="position: absolute; top: 20px; right: 20px;">
+    <button class="button" onclick="showSpotifyIframe()">Show Spotify</button>
   </div>
 
   <script>
@@ -108,6 +54,15 @@
       if (newTitle.trim() !== "") {
         document.title = newTitle;
       }
+    }
+
+    function showSpotifyIframe() {
+      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
+      const spotifyFrame = document.getElementById("spotifyFrame");
+      
+      originalWebsiteFrame.classList.add("hidden");
+      spotifyFrame.src = "https://unblocked-spotify-website-url";
+      spotifyFrame.classList.remove("hidden");
     }
   </script>
 </body>
