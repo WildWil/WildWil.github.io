@@ -9,6 +9,8 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover; /* or contain, depending on your preference */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
       }
       
       h1 {
@@ -20,6 +22,8 @@
       .button-container {
         text-align: center;
         margin-top: 20px;
+        position: relative; /* Set the position to relative */
+        z-index: 2; /* Lift the button above other elements */
       }
 
       .button {
@@ -31,6 +35,14 @@
         border-radius: 5px;
         font-weight: bold;
       }
+
+      iframe {
+        position: relative; /* Set the position to relative */
+        z-index: 1; /* Place the iframe below other elements */
+        width: 100%;
+        height: 600px;
+        border: none;
+      }
     </style>
   </head>
   <body> 
@@ -40,6 +52,6 @@
       <a href="https://clever.com/in/charleston/student/portal" class="button">Go to Clever Portal</a>
     </div>
 
-    <iframe src="https://flow-works.me" width="100%" height="600" frameborder="0"></iframe>
+    <iframe src="https://flow-works.me" frameborder="0"></iframe>
   </body> 
 </html>
