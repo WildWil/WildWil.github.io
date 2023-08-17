@@ -64,6 +64,24 @@
         transform: rotateY(360deg);
       }
     }
+
+    /* Additional Dark Mode Styles */
+    body.dark-mode {
+      background-color: #1e1e1e; /* Dark background color */
+      color: #ffffff; /* Light text color */
+    }
+
+    button.toggle-dark-mode {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +112,8 @@
     <button class="button button-brown" onclick="showSpotifyIframe()">Spotify</button>
     <button class="button button-brown" onclick="changeBackgroundColor()">Change Background</button>
   </div>
+
+  <button class="toggle-dark-mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
 
   <script>
     function changeFavicon() {
@@ -135,6 +155,5 @@
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
       document.body.style.backgroundColor = randomColor;
     }
-  </script>
-</body>
-</html>
+
+    function toggleDarkMode()
