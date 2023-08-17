@@ -43,11 +43,18 @@
     .button-brown {
       background-color: #8B4513; /* Brown color */
     }
+
+    .instructions {
+      color: white;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <header style="text-align: center; padding: 20px;">
-    <h1 style="color: white; padding: 20px; margin: 0;"> To be able to change the icon of the website do "Websitename.com/favicon.ico" for example : "google.com/favicon.ico".</h1>
+    <h1 style="color: white; padding: 20px; margin: 0;"> Clever | Portal</h1>
   </header>
 
   <div class="input-container" style="text-align: center; margin-top: 20px;">
@@ -60,6 +67,7 @@
     <label for="titleInput">Change Title: </label>
     <input type="text" id="titleInput" placeholder="Enter new title">
     <button class="button button-title" onclick="changeTitle()">Apply</button>
+    <p class="instructions">To be able to change the icon of the website, enter the favicon URL above.</p>
   </div>
 
   <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center;">
