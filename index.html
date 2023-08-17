@@ -9,8 +9,6 @@
     /* ... your existing CSS ... */
     body {
       background-color: #999c93; /* Starting background color */
-      margin: 0;
-      overflow: hidden;
     }
 
     .hidden {
@@ -66,28 +64,6 @@
         transform: rotateY(360deg);
       }
     }
-
-    .floating-star {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 30px;
-      height: 30px;
-      background-color: #f39c12;
-      border-radius: 50%;
-      animation: floatStar 4s ease-in-out infinite, rotate 5s linear infinite;
-      cursor: pointer;
-    }
-
-    @keyframes floatStar {
-      0%, 100% {
-        transform: translate(-50%, -50%);
-      }
-      50% {
-        transform: translate(-50%, -40%);
-      }
-    }
   </style>
 </head>
 <body>
@@ -119,8 +95,6 @@
     <button class="button button-brown" onclick="changeBackgroundColor()">Change Background</button>
   </div>
 
-  <div class="floating-star" onclick="triggerSurprise()"></div>
-
   <script>
     function changeFavicon() {
       const faviconInput = document.getElementById("faviconInput");
@@ -139,3 +113,28 @@
       }
     }
 
+    function showOriginalIframe() {
+      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
+      const spotifyFrame = document.getElementById("spotifyFrame");
+      
+      spotifyFrame.classList.add("hidden");
+      originalWebsiteFrame.classList.remove("hidden");
+    }
+
+    function showSpotifyIframe() {
+      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
+      const spotifyFrame = document.getElementById("spotifyFrame");
+      
+      originalWebsiteFrame.classList.add("hidden");
+      spotifyFrame.src = "https://kazwire.com/apps/spotify";
+      spotifyFrame.classList.remove("hidden");
+    }
+
+    function changeBackgroundColor() {
+      const colors = ["#FF5733", "#33FF9C", "#3375FF", "#FF33D6", "#33D0FF"];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.backgroundColor = randomColor;
+    }
+  </script>
+</body>
+</html>
