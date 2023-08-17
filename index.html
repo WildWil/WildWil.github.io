@@ -111,7 +111,6 @@
   <div class="button-container top-right" style="position: absolute; top: 20px; right: 20px;">
     <button class="button button-brown" onclick="showOriginalIframe()">Proxy</button>
     <button class="button button-brown" onclick="showSpotifyIframe()">Spotify</button>
-    <button class="button button-brown" onclick="changeBackgroundColor()">Change Background</button>
   </div>
 
   <button class="toggle-dark-mode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
@@ -149,12 +148,6 @@
       originalWebsiteFrame.classList.add("hidden");
       spotifyFrame.src = "https://kazwire.com/apps/spotify";
       spotifyFrame.classList.remove("hidden");
-    }
-
-    function changeBackgroundColor() {
-      const colors = ["#FF5733", "#33FF9C", "#3375FF", "#FF33D6", "#33D0FF"];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.style.backgroundColor = randomColor;
     }
 
     function toggleDarkMode() {
