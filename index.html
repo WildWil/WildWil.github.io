@@ -39,6 +39,19 @@
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .input-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-right: 10px;
     }
 
     main {
@@ -58,6 +71,18 @@
     <h1>The point of this website is to stop websites from being blocked. When a website is on this website, it cannot be blocked because the administrators cannot view the website.</h1>
   </header>
 
+  <div class="input-container">
+    <label for="faviconInput">Change Favicon: </label>
+    <input type="text" id="faviconInput" placeholder="Enter favicon URL">
+    <button class="button" onclick="changeFavicon()">Apply</button>
+  </div>
+
+  <div class="input-container">
+    <label for="titleInput">Change Title: </label>
+    <input type="text" id="titleInput" placeholder="Enter new title">
+    <button class="button" onclick="changeTitle()">Apply</button>
+  </div>
+
   <div class="button-container">
     <a href="https://clever.com/in/charleston/student/portal" class="button">Go to Clever Portal</a>
   </div>
@@ -65,5 +90,24 @@
   <main>
     <iframe src="https://flow-works.me" frameborder="0"></iframe>
   </main>
+
+  <script>
+    function changeFavicon() {
+      const faviconInput = document.getElementById("faviconInput");
+      const faviconURL = faviconInput.value;
+      if (faviconURL.trim() !== "") {
+        const faviconLink = document.querySelector("link[rel*='icon']");
+        faviconLink.href = faviconURL;
+      }
+    }
+
+    function changeTitle() {
+      const titleInput = document.getElementById("titleInput");
+      const newTitle = titleInput.value;
+      if (newTitle.trim() !== "") {
+        document.title = newTitle;
+      }
+    }
+  </script>
 </body>
 </html>
