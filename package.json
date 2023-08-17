@@ -1,10 +1,10 @@
 {
-  "name": "wildwil-github-io", // Corrected project name
+  "name": "wildwil-github-io", 
   "version": "1.0.0",
   "description": "Personal website hosted on GitHub Pages",
   "repository": {
     "type": "git",
-    "url": "https://github.com/WildWil/wildwil-github-io.git" // Corrected repository URL
+    "url": "https://github.com/WildWil/wildwil-github-io.git" 
   },
   "author": "Your Name",
   "license": "MIT",
