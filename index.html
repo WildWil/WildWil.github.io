@@ -1,57 +1,69 @@
 <!DOCTYPE html>
-<html> 
-  <head> 
-    <title> Clever | Portal </title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <style>
-      body {
-        background-image: url('stars1.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover; /* or contain, depending on your preference */
-        margin: 0; /* Remove default margin */
-        padding: 0; /* Remove default padding */
-      }
-      
-      h1 {
-        color: white; /* Set the text color to white */
-        text-align: center; /* Center the text horizontally */
-        padding: 20px; /* Add some padding for better readability */
-      }
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clever | Portal</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      background-image: url('stars1.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover; /* or contain, depending on your preference */
+      margin: 0; /* Remove default margin */
+      padding: 0; /* Remove default padding */
+    }
 
-      .button-container {
-        text-align: center;
-        margin-top: 20px;
-        position: relative; /* Set the position to relative */
-        z-index: 2; /* Lift the button above other elements */
-      }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
 
-      .button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #3498db;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-      }
+    h1 {
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
 
-      iframe {
-        position: relative; /* Set the position to relative */
-        z-index: 1; /* Place the iframe below other elements */
-        width: 100%;
-        height: 600px;
-        border: none;
-      }
-    </style>
-  </head>
-  <body> 
-    <h1>The point of this website is to stop websites from being blocked. When a website is on this website, it cannot be blocked because the administrators cannot view the website.</h1> 
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-    <div class="button-container">
-      <a href="https://clever.com/in/charleston/student/portal" class="button">Go to Clever Portal</a>
-    </div>
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
 
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The point of this website is to stop websites from being blocked. When a website is on this website, it cannot be blocked because the administrators cannot view the website.</h1>
+  </header>
+
+  <div class="button-container">
+    <a href="https://clever.com/in/charleston/student/portal" class="button">Go to Clever Portal</a>
+  </div>
+
+  <main>
     <iframe src="https://flow-works.me" frameborder="0"></iframe>
-  </body> 
+  </main>
+</body>
 </html>
