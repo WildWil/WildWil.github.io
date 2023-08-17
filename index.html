@@ -7,8 +7,41 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     /* ... your existing CSS ... */
+    body {
+      background-image: url('stars1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
     .hidden {
       display: none;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db; /* Blue color */
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .button-favicon {
+      background-color: #2980b9; /* Different shade of blue */
+    }
+    
+    .button-title {
+      background-color: #1f618d; /* Different shade of blue */
+    }
+    
+    .button-red {
+      background-color: #e74c3c; /* Red color */
     }
   </style>
 </head>
@@ -20,13 +53,13 @@
   <div class="input-container" style="text-align: center; margin-top: 20px;">
     <label for="faviconInput">Change Favicon: </label>
     <input type="text" id="faviconInput" placeholder="Enter favicon URL">
-    <button class="button" onclick="changeFavicon()">Apply</button>
+    <button class="button button-favicon" onclick="changeFavicon()">Apply</button>
   </div>
 
   <div class="input-container" style="text-align: center; margin-top: 20px;">
     <label for="titleInput">Change Title: </label>
     <input type="text" id="titleInput" placeholder="Enter new title">
-    <button class="button" onclick="changeTitle()">Apply</button>
+    <button class="button button-title" onclick="changeTitle()">Apply</button>
   </div>
 
   <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center;">
@@ -35,7 +68,8 @@
   </main>
 
   <div class="button-container top-right" style="position: absolute; top: 20px; right: 20px;">
-    <button class="button" onclick="showSpotifyIframe()">Show Spotify</button>
+    <button class="button button-red" onclick="showOriginalIframe()">Proxy</button>
+    <button class="button button-red" onclick="showSpotifyIframe()">Spotify</button>
   </div>
 
   <script>
@@ -54,6 +88,14 @@
       if (newTitle.trim() !== "") {
         document.title = newTitle;
       }
+    }
+
+    function showOriginalIframe() {
+      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
+      const spotifyFrame = document.getElementById("spotifyFrame");
+      
+      spotifyFrame.classList.add("hidden");
+      originalWebsiteFrame.classList.remove("hidden");
     }
 
     function showSpotifyIframe() {
