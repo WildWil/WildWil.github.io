@@ -136,5 +136,24 @@
       document.body.style.backgroundColor = randomColor;
     }
   </script>
+
+  <!-- ... your existing JavaScript code ... -->
+
+  <script>
+    // ... your existing JavaScript code ...
+
+    function triggerSurprise() {
+      const hiddenMessage = document.getElementById("hiddenMessage");
+      hiddenMessage.classList.remove("hidden");
+
+      // Hide the message when user clicks anywhere outside the box
+      document.addEventListener("click", function(event) {
+        if (event.target !== hiddenMessage) {
+          hiddenMessage.classList.add("hidden");
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
