@@ -67,6 +67,20 @@
       padding: 5px 10px;
       cursor: pointer;
     }
+
+    /* Change color and style for the Apply buttons */
+    .button-apply {
+      background-color: black;
+      font-size: 16px;
+      padding: 5px 10px; /* Adjust padding */
+    }
+
+    /* Move input containers to the left */
+    .input-container {
+      text-align: left;
+      margin-left: 10px; /* Adjust margin */
+      margin-top: 20px;
+    }
   </style>
   <link rel="stylesheet" href="dark-mode.css" id="dark-mode-stylesheet">
 </head>
@@ -75,17 +89,14 @@
     <h1 class="rotating-text" style="padding: 20px; margin: 0;"></h1>
   </header>
 
-  <div class="input-container" style="text-align: center; margin-top: 20px;">
-    <label for="faviconInput">Change Favicon: </label>
+  <div class="input-container">
     <input type="text" id="faviconInput" placeholder="Enter favicon URL">
-    <button class="button button-favicon" onclick="changeFavicon()">Apply</button>
+    <button class="button button-favicon button-apply" onclick="changeFavicon()">✅</button>
   </div>
 
-  <div class="input-container" style="text-align: center; margin-top: 20px;">
-    <label for="titleInput">Change Title: </label>
+  <div class="input-container">
     <input type="text" id="titleInput" placeholder="Enter new title">
-    <button class="button button-title" onclick="changeTitle()">Apply</button>
-    <p class="instructions">To be able to change the icon of the website, enter the favicon URL above.</p>
+    <button class="button button-title button-apply" onclick="changeTitle()">✅</button>
   </div>
 
   <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center;">
