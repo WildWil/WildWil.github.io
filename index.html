@@ -6,49 +6,40 @@
   <title>Clever | Portal</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    /* ... your existing CSS ... */
-    body {
-      background-color: #999c93; /* Starting background color */
+    /* Your existing CSS styles */
+
+    /* Additional styles for the login page */
+    .login-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
 
-    .hidden {
-      display: none;
+    .login-input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #3498db; /* Blue color */
+    .login-button {
+      background-color: #3498db;
       color: white;
-      text-decoration: none;
       border: none;
       border-radius: 5px;
+      padding: 10px 20px;
       font-weight: bold;
-      font-size: 16px;
       cursor: pointer;
-      margin: 5px;
     }
 
-    .button-favicon {
-      background-color: #1f618d; /* Different shade of blue */
-    }
-    
-    .button-title {
-      background-color: #1f618d; /* Different shade of blue */
-    }
-    
-    .button-brown {
-      background-color: #8B4513; /* Brown color */
-    }
-
-    .instructions {
-      color: white;
-      font-size: 14px;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    /* ... your existing styles ... */
+    /* ... your existing CSS ... */
 
     /* Additional Dark Mode Styles */
     body.dark-mode {
@@ -56,24 +47,7 @@
       color: #ffffff; /* Light text color */
     }
 
-    button.toggle-dark-mode {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    /* Change color and style for the Apply buttons */
-    .button-apply {
-      background-color: black;
-      font-size: 16px;
-      padding: 5px 10px; /* Adjust padding */
-    }
+    /* ... your existing styles ... */
 
     /* Move input containers to the left */
     .input-container {
@@ -92,18 +66,20 @@
   <link rel="stylesheet" href="dark-mode.css" id="dark-mode-stylesheet">
 </head>
 <body>
-  <header style="text-align: center; padding: 20px;">
-    <h1 class="rotating-text" style="padding: 20px; margin: 0;"></h1>
-  </header>
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="password" id="loginCode" class="login-input" placeholder="Enter code">
+    <button class="login-button" onclick="checkCode()">Login</button>
+  </div>
 
-  <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center;">
+  <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center; display: none;">
     <iframe id="originalWebsiteFrame" src="https://flow-works.me" frameborder="0" style="width: 100%; height: 800px;"></iframe>
     <iframe id="spotifyFrame" src="" frameborder="0" class="hidden" style="width: 100%; height: 800px;"></iframe>
   </main>
 
-  <button class="button button-brown button-apply" onclick="toggleFaviconAndTitle()">Toggle Favicon & Title Area</button>
+  <button class="button button-brown button-apply hidden" onclick="toggleFaviconAndTitle()">Toggle Favicon & Title Area</button>
 
-  <div class="input-container" id="faviconAndTitleContainer">
+  <div class="input-container hidden" id="faviconAndTitleContainer">
     <input type="text" id="faviconInput" placeholder="Enter favicon URL">
     <button class="button button-favicon button-apply" onclick="changeFavicon()">✅</button>
     <input type="text" id="titleInput" placeholder="Enter new title">
@@ -114,6 +90,16 @@
     function toggleFaviconAndTitle() {
       const container = document.getElementById("faviconAndTitleContainer");
       container.classList.toggle("visible");
+    }
+
+    function checkCode() {
+      const enteredCode = document.getElementById("loginCode").value;
+      if (enteredCode === "1223") {
+        document.querySelector(".login-container").style.display = "none";
+        document.querySelector("main").style.display = "block";
+      } else {
+        alert("Incorrect code. Please try again.");
+      }
     }
 
     // ... your existing functions ...
