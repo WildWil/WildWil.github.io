@@ -80,22 +80,13 @@
       text-align: left;
       margin-left: 10px; /* Adjust margin */
       margin-top: 20px;
+      transition: max-height 0.5s ease-in-out;
+      overflow: hidden;
+      max-height: 0;
     }
 
-    /* Animation for showing/hiding the input area */
-    .input-container-animation {
-      animation: fadeInOut 1s ease-in-out;
-    }
-
-    @keyframes fadeInOut {
-      0%, 100% {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .input-container.visible {
+      max-height: 500px; /* Adjust the max height */
     }
   </style>
   <link rel="stylesheet" href="dark-mode.css" id="dark-mode-stylesheet">
@@ -110,69 +101,22 @@
     <iframe id="spotifyFrame" src="" frameborder="0" class="hidden" style="width: 100%; height: 800px;"></iframe>
   </main>
 
-  <button class="button button-brown" onclick="toggleInputArea()">Toggle Favicon and Title</button>
+  <button class="button button-brown button-apply" onclick="toggleFaviconAndTitle()">Toggle Favicon & Title Area</button>
 
-  <div class="input-container hidden" id="inputContainer">
-    <div class="input-container-animation">
-      <input type="text" id="faviconInput" placeholder="Enter favicon URL">
-      <button class="button button-favicon button-apply" onclick="changeFavicon()">✅</button>
-      <input type="text" id="titleInput" placeholder="Enter new title">
-      <button class="button button-title button-apply" onclick="changeTitle()">✅</button>
-    </div>
+  <div class="input-container" id="faviconAndTitleContainer">
+    <input type="text" id="faviconInput" placeholder="Enter favicon URL">
+    <button class="button button-favicon button-apply" onclick="changeFavicon()">✅</button>
+    <input type="text" id="titleInput" placeholder="Enter new title">
+    <button class="button button-title button-apply" onclick="changeTitle()">✅</button>
   </div>
 
   <script>
-    function changeFavicon() {
-      const faviconInput = document.getElementById("faviconInput");
-      const faviconURL = faviconInput.value;
-      if (faviconURL.trim() !== "") {
-        const faviconLink = document.querySelector("link[rel*='icon']");
-        faviconLink.href = faviconURL;
-      }
+    function toggleFaviconAndTitle() {
+      const container = document.getElementById("faviconAndTitleContainer");
+      container.classList.toggle("visible");
     }
 
-    function changeTitle() {
-      const titleInput = document.getElementById("titleInput");
-      const newTitle = titleInput.value;
-      if (newTitle.trim() !== "") {
-        document.title = newTitle;
-      }
-    }
-
-    function toggleInputArea() {
-      const inputContainer = document.getElementById("inputContainer");
-      inputContainer.classList.toggle("hidden");
-    }
-
-    function showOriginalIframe() {
-      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
-      const spotifyFrame = document.getElementById("spotifyFrame");
-      
-      spotifyFrame.classList.add("hidden");
-      originalWebsiteFrame.classList.remove("hidden");
-    }
-
-    function showSpotifyIframe() {
-      const originalWebsiteFrame = document.getElementById("originalWebsiteFrame");
-      const spotifyFrame = document.getElementById("spotifyFrame");
-      
-      originalWebsiteFrame.classList.add("hidden");
-      spotifyFrame.src = "https://kazwire.com/apps/spotify";
-      spotifyFrame.classList.remove("hidden");
-    }
-
-    function toggleDarkMode() {
-      const body = document.body;
-      const darkModeStylesheet = document.getElementById("dark-mode-stylesheet");
-
-      if (body.classList.contains("dark-mode")) {
-        body.classList.remove("dark-mode");
-        darkModeStylesheet.href = "dark-mode.css";
-      } else {
-        body.classList.add("dark-mode");
-        darkModeStylesheet.href = ""; // Disable the dark mode stylesheet
-      }
-    }
+    // ... your existing functions ...
   </script>
 </body>
 </html>
