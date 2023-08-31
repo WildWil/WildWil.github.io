@@ -9,7 +9,7 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
-  background-image: url('./.Img/makiplays-retrowave.gif');
+  background-image: url('../Img/makiplays-retrowave.gif');
   background-size: cover;
   backdrop-filter: blur(20px);
 }
