@@ -11,3 +11,8 @@ body {
   align-items: center;
   background-size: cover;
 }
+
+buton { 
+  width: 420px
+  background: purple
+}
