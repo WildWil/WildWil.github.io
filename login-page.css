@@ -11,7 +11,6 @@ body {
   align-items: center;
   background-image: url('Img/makiplays-retrowave.gif') no-repeat;
   background-size: cover;
-  backdrop-filter: blur(20px);
 }
 
 #main-holder {
@@ -23,6 +22,7 @@ body {
   background-color: transparent;
   border-radius: 7px;
   box-shadow: 0px 0px 5px 2px black;
+  backdrop-filter: blur(20px);
 }
 
 #login-error-msg-holder {
