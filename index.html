@@ -6,104 +6,92 @@
   <title>Clever | Portal</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    /* Your existing CSS styles */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
 
-    /* Additional styles for the login page */
     .login-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .login-box {
       padding: 20px;
+      background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .login-title {
+      font-size: 24px;
+      margin-bottom: 15px;
     }
 
     .login-input {
+      padding: 8px;
+      margin: 8px 0;
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      transform: translate(-50%, -50%);
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 4px;
     }
 
     .login-button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
       padding: 10px 20px;
-      font-weight: bold;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
     }
 
-    /* ... your existing CSS ... */
-
-    /* Additional Dark Mode Styles */
-    body.dark-mode {
-      background-color: #1e1e1e; /* Dark background color */
-      color: #ffffff; /* Light text color */
+    .login-button:hover {
+      background-color: #0056b3;
     }
 
-    /* ... your existing styles ... */
-
-    /* Move input containers to the left */
-    .input-container {
-      text-align: left;
-      margin-left: 10px; /* Adjust margin */
-      margin-top: 20px;
-      transition: max-height 0.5s ease-in-out;
-      overflow: hidden;
-      max-height: 0;
+    .hidden {
+      display: none;
     }
 
-    .input-container.visible {
-      max-height: 500px; /* Adjust the max height */
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   </style>
-  <link rel="stylesheet" href="dark-mode.css" id="dark-mode-stylesheet">
 </head>
 <body>
   <div class="login-container">
-    <h2>Login</h2>
-    <input type="password" id="loginCode" class="login-input" placeholder="Enter code">
-    <button class="login-button" onclick="checkCode()">Login</button>
+    <div class="login-box">
+      <h2 class="login-title">Login to Access</h2>
+      <input id="passwordInput" class="login-input" type="password" placeholder="Password">
+      <button id="loginButton" class="login-button">Login</button>
+    </div>
   </div>
-
-  <main style="position: relative; z-index: 1; margin-top: 50px; text-align: center; display: none;">
-    <iframe id="originalWebsiteFrame" src="https://excellentmath.me/" frameborder="0" style="width: 100%; height: 800px;"></iframe>
-    <iframe id="spotifyFrame" src="" frameborder="0" class="hidden" style="width: 100%; height: 800px;"></iframe>
-  </main>
-
-  <button class="button button-brown button-apply hidden" onclick="toggleFaviconAndTitle()">Toggle Favicon & Title Area</button>
-
-  <div class="input-container hidden" id="faviconAndTitleContainer">
-    <input type="text" id="faviconInput" placeholder="Enter favicon URL">
-    <button class="button button-favicon button-apply" onclick="changeFavicon()">✅</button>
-    <input type="text" id="titleInput" placeholder="Enter new title">
-    <button class="button button-title button-apply" onclick="changeTitle()">✅</button>
-  </div>
+  <iframe id="iframe" class="hidden" src="https://excellentmath.me"></iframe>
 
   <script>
-    function toggleFaviconAndTitle() {
-      const container = document.getElementById("faviconAndTitleContainer");
-      container.classList.toggle("visible");
-    }
+    const passwordInput = document.getElementById("passwordInput");
+    const loginButton = document.getElementById("loginButton");
+    const iframe = document.getElementById("iframe");
 
-    function checkCode() {
-      const enteredCode = document.getElementById("loginCode").value;
-      if (enteredCode === "1223") {
+    loginButton.addEventListener("click", () => {
+      const password = passwordInput.value;
+      if (password === "1223") {
+        iframe.classList.remove("hidden");
         document.querySelector(".login-container").style.display = "none";
-        document.querySelector("main").style.display = "block";
-      } else {
-        alert("Incorrect code. Please try again.");
       }
-    }
-
-    // ... your existing functions ...
+    });
   </script>
 </body>
 </html>
