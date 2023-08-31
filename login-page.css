@@ -9,7 +9,7 @@ body {
   display: grid;
   justify-items: center;
   align-items: center;
-  background: url("makiplays-retrowave.gif") no-repeat;
+  background: url"makiplays-retrowave.gif" no-repeat;
 }
 
 #main-holder {
