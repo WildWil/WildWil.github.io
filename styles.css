@@ -20,6 +20,9 @@ body {
   border-radius: 40px;
   padding: 30px 40px;
   backdrop-filter: blur(20px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 a {
