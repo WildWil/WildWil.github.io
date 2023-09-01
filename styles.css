@@ -21,6 +21,9 @@ a {
   justify-content: center;
   position: left;
   justify-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   backdrop-filter: blur(30px);
+  margin-top: 25px;
+  margin-left:5px;
+  
 }
