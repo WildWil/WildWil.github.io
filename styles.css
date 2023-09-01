@@ -19,6 +19,7 @@ body {
   border: 2px solid rgba(255, 255, 255, .2);
   border-radius: 40px;
   padding: 30px 40px;
+  backdrop-filter: blur(20px);
 }
 
 a {
@@ -29,5 +30,4 @@ a {
   display: block;
   font-size: x-large;
   font-weight: 900;
-  backdrop-filter: blur (20px);
 }
