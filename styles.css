@@ -22,4 +22,5 @@ a {
   position: left;
   justify-items: center;
   margin-bottom: 50px;
+  backdrop-filter: blur(30px);
 }
