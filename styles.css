@@ -22,3 +22,11 @@ body {
   padding: 30px 40px;
   display: block;
 }
+
+a {
+  color: white;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  padding: 30px 40px;
+  display: block;
+}
