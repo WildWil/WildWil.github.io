@@ -23,6 +23,7 @@ a {
   align-items:center;
   justify-content:center;
   position: left;
+  justify-items: center;
 }
 .button { 
   background: transparent;
