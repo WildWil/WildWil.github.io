@@ -29,4 +29,6 @@ a {
   border-radius: 40px;
   padding: 30px 40px;
   display: block;
+  font-size: x-large;
+  font-weight: bold;
 }
