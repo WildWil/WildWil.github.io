@@ -21,6 +21,7 @@ a {
   justify-content: center;
   position: left;
   justify-items: center;
+  margin-bottom: 50px;
 }
 .button { 
   background: transparent;
