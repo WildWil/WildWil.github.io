@@ -13,7 +13,7 @@ body {
 }
 
 .button { 
-  width: 300px;
+  width: 200px;
   background: transparent;
   color: white;
   border: 2px solid rgba(255, 255, 255, .2);
