@@ -23,8 +23,44 @@
 <body>
     <div class="button">
         <a href="Apps.html" class="site-btn"><img src="images/icons8-apps-90.png"></a>
-        <a href="FlowOS.html" class="site-btn"><img src="images/icons8-internet-90.png"></a
-        <button class="copyButton btn" onclick="copyToClipboard('p1')">Copy</button>
+        <a href="FlowOS.html" class="site-btn"><img src="images/icons8-internet-90.png"></a>
     </div>
 </body>
+    <body>
+    <!-- Your existing code -->
+
+    <div class="button">
+        <a href="Apps.html" class="site-btn"><img src="images/icons8-apps-90.png"></a>
+        <a href="FlowOS.html" class="site-btn"><img src="images/icons8-internet-90.png"></a>
+        
+        <!-- Add the following code for the copy button -->
+        <button id="copyButton" class="site-btn" onclick="copyText()">Copy Text</button>
+    </div>
+
+    <!-- Your existing code -->
+
+    <!-- Add the following script at the end of the body or in the head section -->
+    <script>
+        function copyText() {
+            // Create a textarea element
+            var textArea = document.createElement("textarea");
+            
+            // Set the text to be copied
+            textArea.value = "HI";
+            
+            // Append the textarea to the document
+            document.body.appendChild(textArea);
+            
+            // Select the text in the textarea
+            textArea.select();
+            
+            // Copy the selected text to the clipboard
+            document.execCommand('copy');
+            
+            // Remove the textarea element
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+
 </html>
