@@ -3,55 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clever | Portal</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
-
+    <title>William Ward's Personal Webpage</title>
     <style>
         body {
-            background-image: url('images/Japan.gif');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
             margin: 0;
+            padding: 0;
         }
-
-        .welcome-title {
-            font-size: 3em;
-            color: #fff;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            margin-bottom: 20px;
+        header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-        .button {
+        nav {
             display: flex;
+            justify-content: space-around;
+            margin: 0 auto;
+            max-width: 800px;
         }
-
-        .site-btn {
-            margin: 0 10px;
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
         }
-
-        .site-btn img {
-            width: 90px;
-            height: 90px;
+        nav a:hover {
+            background-color: #eee;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .photos img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="welcome-title">Welcome</div>
-    <div class="button">
-        <a href="Apps.html" class="site-btn"><img src="images/icons8-apps-90.png"></a>
-        <a href="FlowOS.html" class="site-btn"><img src="images/icons8-internet-90.png"></a>
+
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#hobbies">Hobbies</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container" id="home">
+        <div class="section">
+            <h1>Welcome to William Ward's Personal Webpage</h1>
+            <p>Hi! I'm William Ward. I have a diverse range of interests and experiences, from coding webpages to pressure washing. I'm also a track team member at Wando, a gym enthusiast, and a car lover with a special fondness for the Porsche 911.</p>
+        </div>
+
+        <div class="section" id="about">
+            <h2>About Me</h2>
+            <p>I live in Dunes West with my loving family: my parents, my younger sister Martha, my older brother Henry, my dog Beau (a Boykin Spaniel), and a cat. As the middle child, I enjoy a balanced mix of responsibilities and fun.</p>
+            <div class="photos">
+                <img src="path/to/your-photo1.jpg" alt="William coding">
+                <img src="path/to/your-photo2.jpg" alt="Beau the Boykin Spaniel">
+                <img src="path/to/your-photo3.jpg" alt="Pressure washing">
+                <img src="path/to/your-photo4.jpg" alt="Porsche 911">
+                <img src="path/to/your-photo5.jpg" alt="Wando track team">
+                <img src="path/to/your-photo6.jpg" alt="Gym workout">
+            </div>
+        </div>
+
+        <div class="section" id="hobbies">
+            <h2>Hobbies & Interests</h2>
+            <p>My hobbies and interests are varied and keep me active and engaged:</p>
+            <ul>
+                <li><strong>Coding Webpages:</strong> I enjoy creating and designing websites.</li>
+                <li><strong>Pressure Washing:</strong> Keeping things clean and shiny is something I take pride in.</li>
+                <li><strong>Cars:</strong> I love cars, especially the Porsche 911.</li>
+                <li><strong>Fitness:</strong> Regular gym workouts keep me fit and healthy.</li>
+                <li><strong>Track Team:</strong> Being a part of the Wando track team is both challenging and rewarding.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact Me</h2>
+            <p>Feel free to reach out to me through the following channels:</p>
+            <ul>
+                <li><strong>Email:</strong> <a href="mailto:warwil533@gmail.com">warwil533@gmail.com</a></li>
+                <li><strong>Snapchat:</strong> Will_Wardo</li>
+            </ul>
+        </div>
     </div>
+
+    <footer>
+        <p>&copy; 2024 William Ward. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
