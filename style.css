@@ -1,107 +1,262 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
-
-* {
-  box-sizing: border-box;
+#canvas-image-blending {
+  position: absolute;
+  width: 100%;
+  height: 750px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-body {
-  background-color: #eafbff;
-  background-image: linear-gradient(
-    to bottom,
-    #eafbff 0%,
-    #eafbff 50%,
-    #5290f9 50%,
-    #5290f9 100%
-  );
-  font-family: 'Muli', sans-serif;
+.main-content {
+  padding: 5% 5%;
+}
+
+.header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
 }
 
-nav {
-  background-color: #fff;
+.work-header {
+  display: flex;
+}
+
+h1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 3.0rem;
+  font-weight: 700;
+  color: black;
+}
+
+h2 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 2.0rem;
+  font-weight: 500;
+  color: black;
+}
+
+h3 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: black;
+  padding-bottom: 10px;
+}
+
+p {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: black;
+}
+
+.time-text {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 200;
+  color: black;
+}
+
+.header-text {
+  width: 80%
+}
+
+.header-image {
+  width: 65%;
+  height: 65%;
+}
+
+.col {
+  padding-bottom: 30px;
+}
+
+.rounded-corners {
+  border-radius: 20px;
+  height: 300px;
+}
+
+.title-image {
+  border-radius: 20px;
+  width: 80%;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  width: 80px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 3%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-position: inside;
+  list-style-type: square;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  text-align: center;
+}
+
+.flex-container-reverse {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  text-align: center;
+}
+
+.big-container-left {
+  flex: 70%;
+  padding: 10px;
+  text-align: left;
+}
+
+.small-container-right {
+  flex: 30%;
+  padding: 10px;
+  text-align: right;
+}
+
+.big-container-right {
+  flex: 70%;
+  padding: 10px;
+  text-align: left;
+}
+
+.small-container-left {
+  flex: 30%;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Contact me section */
+
+.fa {
+  padding: 20px;
+  font-size: 20px;
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-paper-plane {
+  background: #3D348B;
+  color: white;
+}
+
+.fa-instagram {
+  background: #7678ED;
+  color: white;
+}
+
+.fa-github {
+  background: #0973fd;
+  color: white;
+}
+
+/* Styling for the progress bars */
+
+.progressbar {
+  height: 30px;
+  width: 20%;
+  background-color: #3D348B;
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: width 0.6s linear;
-  overflow-x: hidden;
+  margin: 20px;
 }
 
-nav.active {
-  width: 350px;
+.inner-progressbar {
+  background-color: #7678ED;
+  height: 22px;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding-right: 4px;
+  color: white;
+  text-align: right;
+  font-size: 15px;
 }
 
-nav ul {
-  display: flex;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  width: 0;
-  transition: width 0.6s linear;
-}
-
-nav.active ul {
+.italian {
   width: 100%;
 }
 
-nav ul li {
-  transform: rotateY(0deg);
-  opacity: 0;
-  transition: transform 0.6s linear, opacity 0.6s linear;
+.english {
+  width: 100%;
 }
 
-nav.active ul li {
-  opacity: 1;
-  transform: rotateY(360deg);
+.german {
+  width: 85%;
 }
 
-nav ul a {
-  position: relative;
-  color: #000;
-  text-decoration: none;
-  margin: 0 10px;
+.mandarin {
+  width: 20%
 }
 
-.icon {
-  background-color: #fff;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-  position: relative;
-  height: 30px;
-  width: 30px;
-}
+@media only screen and (max-width: 550px) and (min-width: 200px){
+  .container-fluid {
+    align-content: center;
+  }
 
-.icon:focus {
-  outline: 0;
-}
+  .header {
+    display: inline;
+    align-items: center;
+  }
 
-.icon .line {
-  background-color: #5290f9;
-  height: 2px;
-  width: 20px;
-  position: absolute;
-  top: 10px;
-  left: 5px;
-  transition: transform 0.6s linear;
-}
+  .progressbar {
+    width: 60%;
+  }
 
-.icon .line2 {
-  top: auto;
-  bottom: 10px;
-}
+  .flex-container-reverse {
+    flex-direction: column-reverse;
+  }
+  
+  .big-container-left, .small-container-right {
+    flex: 100%;
+  }
 
-nav.active .icon .line1 {
-  transform: rotate(-765deg) translateY(5.5px);
-}
+  .small-container-right {
+    text-align: center;
+  }
 
-nav.active .icon .line2 {
-  transform: rotate(765deg) translateY(-5.5px);
+  .big-container-right, .small-container-left {
+    flex: 100%;
+  }
+
+  .small-container-left {
+    text-align: center;
+  }
 }
