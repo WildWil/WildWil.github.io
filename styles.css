@@ -32,11 +32,16 @@ header p {
 }
 
 section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-left: 5px solid #d9cbb7;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
 }
 
 h2 {
-  border-bottom: 2px solid #d9cbb7;
+  border-bottom: 1px solid #e0d8cc;
   padding-bottom: 8px;
   margin-bottom: 10px;
   color: #444;
@@ -54,6 +59,7 @@ ul {
 a {
   color: #006666;
   text-decoration: underline;
+  transition: color 0.2s ease-in-out;
 }
 
 a:hover {
@@ -67,4 +73,5 @@ footer {
   font-size: 0.9rem;
   color: #555;
   border-top: 1px solid #ccc;
+  margin-top: 40px;
 }
