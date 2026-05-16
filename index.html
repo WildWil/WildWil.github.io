@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status — WildWil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #09090F;
+      --surface:  #111118;
+      --border:   #1E1E2E;
+      --text:     #E2E8F0;
+      --muted:    #64748B;
+      --accent:   #2563EB;
+      --up:       #10B981;
+      --down:     #EF4444;
+      --degraded: #F59E0B;
+      --paused:   #64748B;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Archivo', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Top bar ── */
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: rgba(9,9,15,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+    .topbar-brand {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .topbar-brand span { color: var(--accent); }
+    .topbar-refresh {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── Overall status banner ── */
+    .banner {
+      margin: 32px auto;
+      max-width: 860px;
+      padding: 0 20px;
+    }
+    .banner-card {
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+      transition: border-color 0.3s;
+    }
+    .banner-card.all-up   { border-color: rgba(16,185,129,0.35); }
+    .banner-card.has-down { border-color: rgba(239,68,68,0.35); }
+    .banner-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .banner-icon.up   { background: rgba(16,185,129,0.12); }
+    .banner-icon.down { background: rgba(239,68,68,0.12); }
+    .banner-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .banner-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .banner-right {
+      margin-left: auto;
+      text-align: right;
+    }
+    .banner-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    /* ── Main content ── */
+    .main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 36px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Monitor card ── */
+    .monitor-list { display: flex; flex-direction: column; gap: 8px; }
+    .monitor-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, transform 0.15s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .monitor-card:hover {
+      border-color: #2E2E3E;
+      transform: translateY(-1px);
+    }
+
+    /* Status dot */
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .dot.up       { background: var(--up); }
+    .dot.down     { background: var(--down); }
+    .dot.degraded { background: var(--degraded); }
+    .dot.paused   { background: var(--paused); }
+    .dot.up::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: var(--up);
+      opacity: 0.25;
+      animation: ping 2s ease infinite;
+    }
+
+    .monitor-name {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .monitor-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .monitor-uptime {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .monitor-uptime strong {
+      color: var(--up);
+      font-weight: 500;
+    }
+    .monitor-uptime.low strong { color: var(--down); }
+    .monitor-status-text {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+    .monitor-status-text.up       { background: rgba(16,185,129,0.12); color: var(--up); }
+    .monitor-status-text.down     { background: rgba(239,68,68,0.12); color: var(--down); }
+    .monitor-status-text.degraded { background: rgba(245,158,11,0.12); color: var(--degraded); }
+    .monitor-status-text.paused   { background: rgba(100,116,139,0.12); color: var(--paused); }
+
+    /* ── Setup card ── */
+    .setup-card {
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      max-width: 860px;
+      margin: 32px auto;
+    }
+    .setup-card h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+    .setup-card p  { color: var(--muted); font-size: 0.88rem; line-height: 1.7; max-width: 500px; margin: 0 auto 24px; }
+    .steps { text-align: left; max-width: 480px; margin: 0 auto; }
+    .step  { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; }
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .step-text strong { color: var(--text); }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(37,99,235,0.1);
+      color: var(--accent);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.82em;
+    }
+
+    /* ── Loader ── */
+    .loader {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 16px;
+      padding: 80px 20px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Animations ── */
+    @keyframes ping {
+      0%   { transform: scale(1); opacity: 0.25; }
+      70%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .monitor-meta { gap: 10px; }
+      .monitor-uptime { display: none; }
+      .banner-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-brand">Wild<span>Wil</span> / status</div>
+    <div class="topbar-refresh" id="refresh-label">checking...</div>
+  </header>
+
+  <div id="app">
+    <div class="loader"><div class="spinner"></div>Loading status...</div>
+  </div>
+
+  <footer>
+    Powered by <a href="https://uptimerobot.com" target="_blank" rel="noopener">UptimeRobot</a>
+    &nbsp;&bull;&nbsp;
+    <a href="https://github.com/WildWil" target="_blank" rel="noopener">github.com/WildWil</a>
+  </footer>
+
+  <script>
+    // ─────────────────────────────────────────────
+    //  CONFIG — paste your UptimeRobot read-only
+    //  API key below (see setup instructions).
+    // ─────────────────────────────────────────────
+    const API_KEY = 'YOUR_API_KEY_HERE';
+
+    // Optional: group monitors by keywords in their name.
+    // Monitors whose names contain a keyword go in that group.
+    // Unmatched monitors appear in "Other".
+    const GROUPS = [
+      { label: 'Websites',         keywords: ['site', 'web', 'www', 'ward', '.com', 'http'] },
+      { label: 'Game Servers',     keywords: ['mc', 'minecraft', 'game', 'server', 'valheim', 'ark'] },
+      { label: 'Home Lab / NAS',   keywords: ['nas', 'home', 'lab', 'plex', 'proxmox', 'pi', 'node'] },
+    ];
+
+    // ─────────────────────────────────────────────
+    //  State
+    // ─────────────────────────────────────────────
+    let lastFetch = null;
+    let refreshTimer = null;
+    const REFRESH_INTERVAL = 60; // seconds
+
+    // ─────────────────────────────────────────────
+    //  UptimeRobot API
+    // ─────────────────────────────────────────────
+    async function fetchMonitors() {
+      const res = await fetch('https://api.uptimerobot.com/v2/getMonitors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key:              API_KEY,
+          format:               'json',
+          logs:                 0,
+          response_times:       0,
+          uptime_ratio:         '30',
+          custom_uptime_ratios: '30',
+        }),
+      });
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      if (data.stat !== 'ok') throw new Error(data.error?.message || 'API returned error');
+      return data.monitors || [];
+    }
+
+    // ─────────────────────────────────────────────
+    //  Helpers
+    // ─────────────────────────────────────────────
+    function statusInfo(monitor) {
+      switch (monitor.status) {
+        case 2:  return { cls: 'up',       label: 'Operational' };
+        case 8:  return { cls: 'degraded', label: 'Seems Down' };
+        case 9:  return { cls: 'down',     label: 'Down' };
+        default: return { cls: 'paused',   label: 'Paused' };
+      }
+    }
+
+    function groupMonitors(monitors) {
+      const buckets = GROUPS.map(g => ({ label: g.label, items: [] }));
+      const other = { label: 'Other', items: [] };
+
+      monitors.forEach(m => {
+        const name = m.friendly_name.toLowerCase();
+        const url  = (m.url || '').toLowerCase();
+        let matched = false;
+        for (let i = 0; i < GROUPS.length; i++) {
+          if (GROUPS[i].keywords.some(k => name.includes(k) || url.includes(k))) {
+            buckets[i].items.push(m);
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) other.items.push(m);
+      });
+
+      return [...buckets, other].filter(b => b.items.length > 0);
+    }
+
+    function formatUptime(monitor) {
+      const ratio = monitor.custom_uptime_ratio || monitor.uptime_ratio;
+      if (!ratio) return null;
+      const val = parseFloat(ratio.split('-')[0]);
+      return isNaN(val) ? null : val.toFixed(2) + '%';
+    }
+
+    function timeAgo(date) {
+      const s = Math.floor((Date.now() - date) / 1000);
+      if (s < 10)  return 'just now';
+      if (s < 60)  return `${s}s ago`;
+      if (s < 120) return '1 min ago';
+      return `${Math.floor(s / 60)}m ago`;
+    }
+
+    function nowString() {
+      return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    // ─────────────────────────────────────────────
+    //  Render
+    // ─────────────────────────────────────────────
+    function renderSetup() {
+      document.getElementById('app').innerHTML = `
+        <div class="setup-card" style="padding: 20px 20px 0; max-width:860px; margin: 20px auto 0;">
+          <div class="setup-card" style="margin:0;">
+            <h2>Connect UptimeRobot to go live</h2>
+            <p>Add your read-only API key to this page to display real-time uptime data. Takes about 2 minutes.</p>
+            <div class="steps">
+              <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-text">Create a free account at <strong>uptimerobot.com</strong> and add your monitors (website URLs, server IPs, ports).</div>
+              </div>
+              <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-text">Go to <strong>My Settings</strong> → scroll to <strong>API Settings</strong> → copy your <strong>Read-Only API Key</strong>.</div>
+              </div>
+              <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-text">Open <code>index.html</code>, find <code>const API_KEY = 'YOUR_API_KEY_HERE'</code> near the top of the script, and replace the placeholder with your key.</div>
+              </div>
+              <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-text">Push the change to GitHub — your status page will go live automatically.</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderMonitors(monitors) {
+      lastFetch = new Date();
+      const allUp     = monitors.every(m => m.status === 2);
+      const anyDown   = monitors.some(m => m.status === 9 || m.status === 8);
+      const groups    = groupMonitors(monitors);
+
+      const bannerClass = allUp ? 'all-up' : 'has-down';
+      const bannerIcon  = allUp ? '✓' : '!';
+      const iconCls     = allUp ? 'up' : 'down';
+      const bannerTitle = allUp
+        ? 'All systems operational'
+        : monitors.filter(m => m.status !== 2).length + ' service(s) need attention';
+      const bannerSub = `${monitors.length} monitor${monitors.length !== 1 ? 's' : ''} tracked`;
+
+      const groupsHTML = groups.map(g => `
+        <div class="section">
+          <div class="section-header">
+            <span class="section-label">${g.label}</span>
+            <div class="section-line"></div>
+          </div>
+          <div class="monitor-list">
+            ${g.items.map((m, i) => {
+              const { cls, label } = statusInfo(m);
+              const uptime = formatUptime(m);
+              const uptimeClass = uptime && parseFloat(uptime) < 95 ? 'low' : '';
+              return `
+                <div class="monitor-card" style="animation-delay:${i * 0.05}s">
+                  <div class="dot ${cls}"></div>
+                  <span class="monitor-name">${m.friendly_name}</span>
+                  <div class="monitor-meta">
+                    ${uptime ? `<span class="monitor-uptime ${uptimeClass}"><strong>${uptime}</strong> / 30d</span>` : ''}
+                    <span class="monitor-status-text ${cls}">${label}</span>
+                  </div>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`).join('');
+
+      document.getElementById('app').innerHTML = `
+        <div class="banner">
+          <div class="banner-card ${bannerClass}">
+            <div class="banner-icon ${iconCls}">${bannerIcon}</div>
+            <div>
+              <div class="banner-title">${bannerTitle}</div>
+              <div class="banner-sub">${bannerSub}</div>
+            </div>
+            <div class="banner-right">
+              <div class="banner-time">Updated ${nowString()}</div>
+            </div>
+          </div>
+        </div>
+        <div class="main">${groupsHTML}</div>`;
+    }
+
+    function renderError(msg) {
+      document.getElementById('app').innerHTML = `
+        <div class="loader" style="color:var(--down)">
+          <div style="font-size:1.5rem">⚠</div>
+          <div>${msg}</div>
+          <div style="font-size:0.75rem;color:var(--muted)">Will retry shortly.</div>
+        </div>`;
+    }
+
+    // ─────────────────────────────────────────────
+    //  Refresh ticker
+    // ─────────────────────────────────────────────
+    function updateRefreshLabel() {
+      const el = document.getElementById('refresh-label');
+      if (!el || !lastFetch) return;
+      el.textContent = 'updated ' + timeAgo(lastFetch);
+    }
+
+    // ─────────────────────────────────────────────
+    //  Main loop
+    // ─────────────────────────────────────────────
+    async function refresh() {
+      if (API_KEY === 'YOUR_API_KEY_HERE' || !API_KEY) {
+        renderSetup();
+        return;
+      }
+      try {
+        const monitors = await fetchMonitors();
+        renderMonitors(monitors);
+      } catch (e) {
+        renderError('Could not reach UptimeRobot API.');
+        console.error(e);
+      }
+    }
+
+    refresh();
+    setInterval(refresh, REFRESH_INTERVAL * 1000);
+    setInterval(updateRefreshLabel, 5000);
+  </script>
+</body>
+</html>
